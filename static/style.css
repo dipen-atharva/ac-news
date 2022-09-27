@@ -6,11 +6,11 @@ ul {
     background-color: rgb(43, 41, 39);
   }
 
-li {
+#navbar li {
     float: left;
 }
 
-li a {
+#navbar li a {
     display: block;
     color: white;
     text-align: center;
@@ -18,8 +18,12 @@ li a {
     text-decoration: none;
 }
   
-li a:hover {
+#navbar li a:hover {
     background-color: rgb(133, 122, 122);
     color: rgb(40, 38, 38);
+}
+
+a.link{
+    display: block;
 }
   

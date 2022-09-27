@@ -3,8 +3,9 @@ head
     title Ac-News
     style 
         include ../static/style.css
+    script(src='../static/index.js')
 body
-    navbar 
+    nav#navbar 
         ul 
             li 
                 a(href='#ac-news') Ac-News
@@ -16,7 +17,12 @@ body
                 a(href='#about') About
             li 
                 a(href='#contact') Contact
-    #container.col
-        p You are amazing
-        p Pug is a terse and simple templating language.
-            
+
+    section#sec1
+        ol 
+            each val in data
+                li <b>#{val.title}</b> (Cateogry :-#{val.category})
+                    <br>  
+                    p #{val.description} 
+                    a.link(href=`${val.url}`) Read More...
+                <br>
