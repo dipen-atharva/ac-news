@@ -169,7 +169,7 @@ app.get('/', (req, res)=>{
     res.status(200).render('index', {data : data});
 })
 
-
 app.listen(port, ()=>{
     console.log(`The application started successfully on port ${port}`);
 });
+
