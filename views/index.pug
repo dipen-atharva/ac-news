@@ -3,7 +3,10 @@ head
     title Ac-News
     style 
         include ../static/style.css
-    script(src='../static/index.js')
+    //- script(src='../static/page.js')
+    //- script(src='https://code.jquery.com/jquery-3.4.1.min.js')
+    //- script(src='https://pagination.js.org/dist/2.1.4/pagination.min.js')
+    //- link(rel='stylesheet' href='https://pagination.js.org/dist/2.1.4/pagination.css')
 body
     nav#navbar 
         ul 
@@ -23,8 +26,10 @@ body
             each val in data
                 li <b>#{val.title}</b> (Cateogry :-#{val.category})
                     <br>  
-                    p #{val.description} 
+                    | #{val.description} 
+                    <br>
                     a.link(href=`${val.url}`) Read More...
+                    | <i>Published by #{val.author} at #{val.published} </i>
                 <br>
 
     section.pagination
