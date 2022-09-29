@@ -3,10 +3,7 @@ head
     title Ac-News
     style 
         include ../static/style.css
-    //- script(src='../static/page.js')
-    //- script(src='https://code.jquery.com/jquery-3.4.1.min.js')
-    //- script(src='https://pagination.js.org/dist/2.1.4/pagination.min.js')
-    //- link(rel='stylesheet' href='https://pagination.js.org/dist/2.1.4/pagination.css')
+
 body
     nav#navbar 
         ul 
@@ -21,9 +18,9 @@ body
             li 
                 a(href='#contact') Contact
 
-    section#sec1
+    section#sec1    
         ol 
-            each val in trimeddata 
+            each val in postList  
                 li <b>#{val.title}</b> (Category :-#{val.category})
                     <br>  
                     | #{val.description} 
@@ -31,7 +28,5 @@ body
                     a.link(href=`${val.url}`) Read More...
                     | <i>Published by #{val.author} at #{val.published} </i>
                 <br>
-
-    section.pagination
-        a(href='#') Previous
-        a(href='#') Next
+    //- section.pagination 
+    //-     if 

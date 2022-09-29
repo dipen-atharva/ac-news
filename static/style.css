@@ -37,7 +37,7 @@ section#sec1{
     background-color: rgb(207, 219, 237);
 }
 
-section.pagination{
+.pagination{
     flex-direction: row;
 display: flex;
 justify-content: center;
