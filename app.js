@@ -93,7 +93,7 @@ app.get('/',(req, res)=>{
     const pageSize = 2
     var pageCount = Math.ceil(totalRec / pageSize)
     var start = 0
-    var currentPage = req.query.currentPage || 1
+    var currentPage = req.query.currentPage
     if (currentPage > 1) {
         start = (currentPage - 1) * pageSize;
     }

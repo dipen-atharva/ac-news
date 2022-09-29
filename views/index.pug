@@ -6,7 +6,7 @@ head
 
 body
     nav#navbar 
-        ul 
+        ul#navul 
             li 
                 a(href='#ac-news') Ac-News
             li 
@@ -18,8 +18,8 @@ body
             li 
                 a(href='#contact') Contact
 
-    section#sec1    
-        ol 
+    section#sec1 
+        ul    
             each val in postList  
                 li <b>#{val.title}</b> (Category :-#{val.category})
                     <br>  
@@ -30,9 +30,9 @@ body
                 <br>
         
     div.pagination
-      if (currentPage > 1)
-        a(href="/?currentPage="+(Number(currentPage)-1)) &laquo;
-      if (currentPage)
-        a(href="/?currentPage="+(Number(currentPage))) #{Number(currentPage)}
-      if (currentPage < pageCount)  
-        a(href="/?currentPage="+(Number(currentPage)+1)) &raquo;
+        if (currentPage > 1)
+            a(href="/?currentPage="+(Number(currentPage)-1)) &laquo; 
+        if (currentPage)
+            a.active(href="/?currentPage="+(Number(currentPage))) #{Number(currentPage)}
+        if (currentPage < pageCount)  
+            a(href="/?currentPage="+(Number(currentPage)+1)) &raquo;

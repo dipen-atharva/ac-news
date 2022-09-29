@@ -4,7 +4,7 @@ section{
     justify-content: center;
 }
 
-ul {
+ul#navul{
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -37,7 +37,7 @@ section#sec1{
     background-color: rgb(207, 219, 237);
 }
 
-.pagination{
+div.pagination{
     flex-direction: row;
 display: flex;
 justify-content: center;
@@ -52,9 +52,13 @@ justify-content: center;
 }
   
 .pagination a.active {
-    background-color: dodgerblue;
+    background-color: rgb(108, 175, 241);
     color: white;
 }
+.pagination a.active:hover {
+    background-color: rgb(55, 148, 241);
+    color: rgb(14, 13, 13);
+}
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination a:hover:not(.active) {background-color: #b9b4b4}
   
