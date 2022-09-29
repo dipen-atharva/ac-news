@@ -23,7 +23,7 @@ body
 
     section#sec1
         ol 
-            each val in data
+            each val in trimeddata 
                 li <b>#{val.title}</b> (Category :-#{val.category})
                     <br>  
                     | #{val.description} 
@@ -33,11 +33,5 @@ body
                 <br>
 
     section.pagination
-        a(href='') &laquo;
-        a.active(href='') 1
-        a(href='#') 2
-        a(href='') 3
-        a(href='') 4
-        a(href='') 5
-        a(href='') 6
-        a(href='') &raquo;
+        a(href='#') Previous
+        a(href='#') Next
