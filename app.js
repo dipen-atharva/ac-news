@@ -91,23 +91,23 @@ app.get('/',(req, res)=>{
      ]
     const totalRec = Object.keys(data).length
     const pageSize = 2
-    const pageCount = Math.ceil(totalRec / pageSize)
-    const start = 0
-    const currentPage = 1
+    var pageCount = Math.ceil(totalRec / pageSize)
+    var start = 0
+    var currentPage = req.query.currentPage || 1
     if (currentPage > 1) {
         start = (currentPage - 1) * pageSize;
     }
     console.log("pageCount: " + pageCount + " totalRec: " + totalRec + " start: " + start)
 
-    const postList = data.slice(start, start+pageSize)
-    console.log(postList) 
+    var postList = data.slice(start, start+pageSize)
+    // console.log(postList) 
     res.status(200).render('index',{
         postList : postList,
-        totalRec,
-        pageSize,
-        pageCount,
-        start,
-        currentPage
+        totalRec :totalRec,
+        pageSize:pageSize,
+        pageCount:pageCount,
+        start:start,
+        currentPage:currentPage
     });
 })
 

@@ -26,6 +26,13 @@ body
                     | #{val.description} 
                     <br>
                     a.link(href=`${val.url}`) Read More...
-                    | <i>Published by #{val.author} at #{val.published} </i>
+                    | <i>Published by #{val.author} at #{val.published_at} </i>
                 <br>
-    
+        
+    div.pagination
+      if (currentPage > 1)
+        a(href="/?currentPage="+(Number(currentPage)-1)) &laquo;
+      if (currentPage)
+        a(href="/?currentPage="+(Number(currentPage))) #{Number(currentPage)}
+      if (currentPage < pageCount)  
+        a(href="/?currentPage="+(Number(currentPage)+1)) &raquo;
