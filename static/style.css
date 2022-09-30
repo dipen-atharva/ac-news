@@ -4,7 +4,7 @@ section{
     justify-content: center;
 }
 
-ul {
+nav#navbar ul{
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -37,7 +37,7 @@ section#sec1{
     background-color: rgb(207, 219, 237);
 }
 
-section.pagination{
+div.pagination{
     flex-direction: row;
 display: flex;
 justify-content: center;

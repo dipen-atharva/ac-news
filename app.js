@@ -31,7 +31,27 @@ app.get('/',(req, res)=>{
    News.find({},function(err,news){
       if(err) console.log(err);
       // console.log(news);
-      res.status(200).render('index',{news : news});
+      const totalRec = Object.keys(news).length
+      const pageSize = 10
+      var pageCount = Math.ceil(totalRec / pageSize)
+      var start = 0
+      var currentPage = req.query.currentPage
+      if (currentPage > 1) {
+         start = (currentPage - 1) * pageSize;
+      }
+      console.log("pageCount: " + pageCount + " totalRec: " + totalRec + " start: " + start)
+
+      var postList = news.slice(start, start+pageSize)
+      // console.log(postList) 
+      res.status(200).render('index',{
+         postList : postList,
+         totalRec :totalRec,
+         pageSize:pageSize,
+         pageCount:pageCount,
+         start:start,
+         currentPage:currentPage
+      });
+      // res.status(200).render('index',{news : news});
    }) 
 })
 

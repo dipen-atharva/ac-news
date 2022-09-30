@@ -22,8 +22,8 @@ body
                 a(href='#contact') Contact
 
     section#sec1
-        ol 
-            each val in news
+        ul 
+            each val in postList
                 li <b>#{val.title}</b> (Category :-#{val.category})
                     <br>  
                     | #{val.description} 
@@ -31,3 +31,10 @@ body
                     a.link(href=`${val.url}`) Read More...
                     | <i>Published by #{val.author} at #{val.published_at}#{val.published}</i>
                 <br>
+    div.pagination
+        if (currentPage > 1)
+            a(href="/?currentPage="+(Number(currentPage)-1)) &laquo; 
+        if (currentPage)
+            a.active(href="/?currentPage="+(Number(currentPage))) #{Number(currentPage)}
+        if (currentPage < pageCount)  
+            a(href="/?currentPage="+(Number(currentPage)+1)) &raquo;
