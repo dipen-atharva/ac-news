@@ -18,10 +18,11 @@ let newsSchema = new mongoose.Schema({
    url: String,
    source: String,
    image: String,
-   category: String,
+   category: Array,
    language: String,
    country: String,
-   published_at: String
+   published_at: String,
+   published : String
 })
 
 const News = mongoose.model('news',newsSchema);
@@ -29,7 +30,7 @@ const News = mongoose.model('news',newsSchema);
 app.get('/',(req, res)=>{
    News.find({},function(err,news){
       if(err) console.log(err);
-      console.log(news);
+      // console.log(news);
       res.status(200).render('index',{news : news});
    }) 
 })
