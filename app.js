@@ -26,19 +26,23 @@ let newsSchema = new mongoose.Schema({
 
 const News = mongoose.model('news',newsSchema);
 
-const data = News.find({},function(err,news){
-   if(err) console.log(err);
-   console.log(news);
+app.get('/',(req, res)=>{
+   News.find({},function(err,news){
+      if(err) console.log(err);
+      console.log(news);
+      res.status(200).render('index',{news : news});
+   }) 
 })
+
 app.use('/static', express.static('static')) 
 app.use(express.urlencoded({ extended: true }))
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'))
 
-app.get('/',(req, res)=>{
-   res.status(200).render('index',{data : data});
-})
+// app.get('/',(req, res)=>{
+//    res.status(200).render('index',{data : data});
+// })
 
 app.listen(port, ()=>{
     console.log(`The application started successfully on port ${port}`);

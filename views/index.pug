@@ -23,21 +23,11 @@ body
 
     section#sec1
         ol 
-            each val in data
-                li <b>#{title}</b> (Category :-#{category})
-                //-     <br>  
-                //-     | #{val.description} 
-                //-     <br>
-                //-     a.link(href=`${val.url}`) Read More...
-                //-     | <i>Published by #{val.author} at #{val.published} </i>
-                //- <br>
-
-    section.pagination
-        a(href='') &laquo;
-        a.active(href='') 1
-        a(href='#') 2
-        a(href='') 3
-        a(href='') 4
-        a(href='') 5
-        a(href='') 6
-        a(href='') &raquo;
+            each val in news
+                li <b>#{val.title}</b> (Category :-#{val.category})
+                    <br>  
+                    | #{val.description} 
+                    <br>
+                    a.link(href=`${val.url}`) Read More...
+                    | <i>Published by #{val.author} at #{val.published_at} </i>
+                <br>
