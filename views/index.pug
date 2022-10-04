@@ -30,11 +30,14 @@ body
                     <br>
                     a.link(href=`${val.url}`) Read More...
                     | <i>Published by #{val.author} at #{val.published_at}#{val.published}</i>
+                    a(href="?p=1")
                 <br>
+    
+                
     div.pagination
         if (currentPage > 1)
-            a(href="/?currentPage="+(Number(currentPage)-1)) &laquo; 
+            a(href="?p="+(Number(currentPage)-1)) &laquo; 
         if (currentPage)
-            a.active(href="/?currentPage="+(Number(currentPage))) #{Number(currentPage)}
-        if (currentPage < pageCount)  
-            a(href="/?currentPage="+(Number(currentPage)+1)) &raquo;
+            a.active(href="?p="+(Number(currentPage))) #{Number(currentPage)}
+        if (currentPage >= 1)  
+            a(href="?p="+(Number(currentPage)+1)) &raquo;
