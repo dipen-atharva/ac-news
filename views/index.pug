@@ -3,27 +3,24 @@ head
     title Ac-News
     style 
         include ../static/style.css
-    //- script(src='../static/page.js')
-    //- script(src='https://code.jquery.com/jquery-3.4.1.min.js')
-    //- script(src='https://pagination.js.org/dist/2.1.4/pagination.min.js')
-    //- link(rel='stylesheet' href='https://pagination.js.org/dist/2.1.4/pagination.css')
-body
-    nav#navbar 
-        ul 
-            li 
-                a(href='#ac-news') Ac-News
-            li 
-                a.active(href='#home') Home
-            li 
-                a(href='#news') News
-            li 
-                a(href='#about') About
-            li 
-                a(href='#contact') Contact
+  
+    body
+        nav#navbar 
+            ul 
+                li 
+                    a(href='#ac-news') Ac-News
+                li 
+                    a.active(href='#home') Home
+                li 
+                    a(href='#news') News
+                li 
+                    a(href='#about') About
+                li 
+                    a(href='#contact') Contact
 
     section#sec1
         ul 
-            each val in postList
+            each val in result
                 li <b>#{val.title}</b> (Category :-#{val.category})
                     <br>  
                     | #{val.description} 
@@ -34,10 +31,10 @@ body
                 <br>
     
                 
-    div.pagination
-        if (currentPage > 1)
-            a(href="?p="+(Number(currentPage)-1)) &laquo; 
-        if (currentPage)
-            a.active(href="?p="+(Number(currentPage))) #{Number(currentPage)}
-        if (currentPage >= 1)  
-            a(href="?p="+(Number(currentPage)+1)) &raquo;
+    //- div.pagination
+    //-     if (currentPage > 1)
+    //-         a(href="?p="+(Number(currentPage)-1)) &laquo; 
+    //-     if (currentPage)
+    //-         a.active(href="?p="+(Number(currentPage))) #{Number(currentPage)}
+    //-     if (currentPage >= 1)  
+    //-         a(href="?p="+(Number(currentPage)+1)) &raquo;
