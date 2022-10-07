@@ -20,7 +20,7 @@ head
 
     section#sec1
         ul 
-            each val in result
+            each val in results
                 li <b>#{val.title}</b> (Category :-#{val.category})
                     <br>  
                     | #{val.description} 
@@ -29,12 +29,11 @@ head
                     | <i>Published by #{val.author} at #{val.published_at}#{val.published}</i>
                     a(href="?p=1")
                 <br>
-    
-                
-    //- div.pagination
-    //-     if (currentPage > 1)
-    //-         a(href="?p="+(Number(currentPage)-1)) &laquo; 
-    //-     if (currentPage)
-    //-         a.active(href="?p="+(Number(currentPage))) #{Number(currentPage)}
-    //-     if (currentPage >= 1)  
-    //-         a(href="?p="+(Number(currentPage)+1)) &raquo;
+                  
+    div.pagination
+        if (page > 1)
+            a(href="?p="+(Number(page)-1)) &laquo; 
+        if (page)
+            a.active(href="?p="+(Number(page))) #{Number(page)}
+        if (page > 0)  
+            a(href="?p="+(Number(page)+1)) &raquo;

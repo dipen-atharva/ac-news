@@ -1,33 +1,47 @@
 const express = require('express');
 const app = express();
-const path = require("path");
+const path = require('path')
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/ac-news"
-const port = 5000;
-app.get('/',async (req, res) => {
+const port = 4000;
 
-  async function asyncCall() {
+const client = new MongoClient(url);
 
-    const client = await MongoClient.connect(url, { useNewUrlParser: true })
-                  .catch(err => { console.log(err); });
-    if (!client) {
-        return;
-    }
-    try {
-        const db = client.db("ac-news");
-        let collection = db.collection('news');
-        // let query = { author : "TMZ Staff" }
-        let result = await collection.find().toArray();
-        console.log(result);
-    } catch (err) {
-        console.log(err);
-    } finally {
-        // client.close();
-    }
-  }
-  result = await asyncCall();
-  // console.log(typeof(result))
-  res.status(200).render("index" , {result : result});
+// async function run() {
+//   try {
+//     const query = { };
+//     const options = {projection: { author: 1 ,_id : 0 }};
+//     const cursor = news.find(query,options).skip(5).limit(5);
+//     await cursor.forEach(console.log);
+  
+//     await cursor.close();
+//   } finally {
+//     await client.close();
+//   }
+// }
+// run().catch(console.dir);
+
+app.get("/" , (req,res) => {
+    var perPage = 7 ;
+    var page = req.query.p || 1 ;
+
+    const database = client.db("ac-news");
+    const news = database.collection("news");
+    const query = { };
+    // const options = {projection: { author: 1 ,_id : 0 }};
+    const cursor = news.find(query)
+                       .skip((perPage * page) - perPage)
+                       .limit(perPage);
+    let results = []
+    cursor.forEach(value => results.push(value)).then( () => {
+      res.status(200).render('index' , {
+        results,
+        perPage,
+        page
+      })
+      // cursor.close()
+      // client.close()
+    });
 })
 
 app.use('/static', express.static('static'))
