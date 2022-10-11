@@ -45,7 +45,7 @@ app.get("/2" , (req,res) => {
   .limit(perPage);
   let results = []
   cursor.forEach(value => results.push(value)).then( () => {
-    res.status(200).render('index' , {
+    res.status(200).render('index2' , {
       results,
       perPage,
       page

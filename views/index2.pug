@@ -5,20 +5,6 @@ head
         include ../static/style.css
     script 
         include ../static/client.js
-  
-    body
-        nav#navbar 
-            ul 
-                li 
-                    a(href='#ac-news') Ac-News
-                li 
-                    a.active(href='#home') Home
-                li 
-                    a(href='#news') News
-                li 
-                    a(href='#about') About
-                li 
-                    a(href='#contact') Contact
 
     div#sec1
         ul#ul1
@@ -31,7 +17,3 @@ head
                     | <i>Published by #{val.author} at #{val.published_at}#{val.published}</i>
                     a(href="?p=1")
                 <br>
-                  
-    div.loadmore
-        button(type='button' onclick="getData(this)")
-            | Load More
