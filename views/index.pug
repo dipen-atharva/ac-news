@@ -3,6 +3,8 @@ head
     title Ac-News
     style 
         include ../static/style.css
+    script 
+        include ../static/client.js
   
     body
         nav#navbar 
@@ -19,9 +21,9 @@ head
                     a(href='#contact') Contact
 
     section#sec1
-        ul 
+        ul#ul1
             each val in results
-                li <b>#{val.title}</b> (Category :-#{val.category})
+                li#li1 <b>#{val.title}</b> (Category :-#{val.category})
                     <br>  
                     | #{val.description} 
                     <br>
@@ -30,10 +32,6 @@ head
                     a(href="?p=1")
                 <br>
                   
-    div.pagination
-        if (page > 1)
-            a(href="?p="+(Number(page)-1)) &laquo; 
-        if (page)
-            a.active(href="?p="+(Number(page))) #{Number(page)}
-        if (page > 0)  
-            a(href="?p="+(Number(page)+1)) &raquo;
+    div.loadmore
+        button(type='button' onclick="getData(this)")
+            | Load More

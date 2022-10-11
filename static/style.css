@@ -1,16 +1,16 @@
-section{
+section {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-nav#navbar ul{
+nav#navbar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: rgb(43, 41, 39);
-  }
+}
 
 #navbar li {
     float: left;
@@ -23,21 +23,21 @@ nav#navbar ul{
     padding: 14px 16px;
     text-decoration: none;
 }
-  
+
 #navbar li a:hover {
     background-color: rgb(133, 122, 122);
     color: rgb(40, 38, 38);
 }
 
-a.link{
+a.link {
     display: block;
 }
 
-section#sec1{
+section#sec1 {
     background-color: rgb(207, 219, 237);
 }
 
-div.pagination{
+/* div.pagination{
     flex-direction: row;
 display: flex;
 justify-content: center;
@@ -56,5 +56,19 @@ justify-content: center;
     color: white;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
-  
+.pagination a:hover:not(.active) {background-color: #ddd;} */
+
+.loadmore button {
+    border-radius: 9px;
+    color: rgb(255, 255, 255);
+    float: left;
+    padding: 2px 7px;
+    text-decoration: none;
+    transition: background-color .3s;
+    background-color: rgb(43, 41, 39);
+}
+
+.loadmore button:hover {
+    background-color: rgb(207, 219, 237);
+    color: black;
+}
