@@ -5,17 +5,15 @@ head
         include ../static/style.css
     script 
         include ../static/client.js
-        
-    section#sec1  
-        ul#ul1
-            each val in results
-                li#li1 <b>#{val.title}</b> (Category :-#{val.category})
-                    <br>  
-                    | #{val.description} 
-                    <br>
-                    a.link(href=`${val.url}`) Read More...
-                    | <i>Published by #{val.author} at #{val.published_at}#{val.published}</i>
-                <br>
+         
+    each val in results
+        li#li1 <b>#{val.title}</b> (Category :-#{val.category})
+            <br>  
+            | #{val.description} 
+            <br>
+            a.link(href=`${val.url}`) Read More...
+            | <i>Published by #{val.author} at #{val.published_at}#{val.published}</i>
+        <br>   
 
     //- div.loadmore
     //-     a(href=`/2?p=${pageNumber}` onclick="getData(event);") Load More

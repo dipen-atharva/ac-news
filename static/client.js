@@ -4,7 +4,7 @@ function getData(e) {
   const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("sec1").innerHTML += this.responseText;
+      document.getElementById("ul1").innerHTML += this.responseText;
     }
   };
   // var val = document.getElementById("myAnchor").getAttribute("href");  
@@ -12,6 +12,6 @@ function getData(e) {
   // console.log(pageNumber); 
   count++;
   console.log(count)
-  xhttp.open("GET", `http://localhost:4000/dipen?p=${count}` );
+  xhttp.open("GET", `http://localhost:4000/2r?p=${count}` );
   xhttp.send();
 }

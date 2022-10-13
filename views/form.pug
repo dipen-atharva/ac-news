@@ -1,0 +1,46 @@
+doctype html
+head
+    title Ac-News
+    style 
+        include ../static/style.css
+    script 
+        include ../static/form.js
+  
+    body
+        nav#navbar 
+            ul 
+                li 
+                    a(href='#ac-news') Ac-News
+                li 
+                    a.active(href='/') Home
+                li 
+                    a(href='/form') Upload News
+                li 
+                    a(href='#about') About
+                li 
+                    a(href='#contact') Contact
+    
+    section#sec1
+            form(action='/' method= 'POST')
+                table
+                    tr#title
+                    td.tdLabel
+                        label.label Enter Title :
+                    td
+                        input(type='text' name='title' value='' style='width:160px')
+                    tr
+                    td.tdLabel
+                        label.label Enter URL:
+                    td#url
+                        input(type='text' name='url' style='width:160px')
+                    tr
+                    td.tdLabel
+                        label.label Enter Description :
+                    td#desc
+                        textarea(name="desc", cols="30", rows="5") 
+                    tr
+                    td(colspan='2')
+                        button(type='submit' onclick="getFormData();") Submit
+
+
+                            

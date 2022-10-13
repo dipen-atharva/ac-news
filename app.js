@@ -11,12 +11,9 @@ app.get("/" , (req,res) => {
  
     var perPage = 7 ;
     var page = 1 ;
-    
-    
     const database = client.db("ac-news");
     const news = database.collection("news");
     const query = { };
-    // const options = {projection: { author: 1 ,_id : 0 }};
     const cursor = news.find(query)
     .skip((perPage * page) - perPage)
     .limit(perPage);
@@ -27,20 +24,16 @@ app.get("/" , (req,res) => {
         perPage,
         page
       })
-      // cursor.close()
-      // client.close()
     });
 })
 
-app.get("/dipen" , (req,res) => {
+app.get("/2r" , (req,res) => {
  
   var perPage = 7 ;
   var page = req.query.p ;
-  
   const database = client.db("ac-news");
   const news = database.collection("news");
   const query = { };
-  // const options = {projection: { author: 1 ,_id : 0 }};
   const cursor = news.find(query)
   .skip((perPage * page) - perPage)
   .limit(perPage);
@@ -51,9 +44,11 @@ app.get("/dipen" , (req,res) => {
       perPage,
       page
     })
-    // cursor.close()
-    // client.close()
   });
+})
+
+app.get("/form",(req,res) => {
+  res.status(200).render("form")
 })
 app.use('/static', express.static('static'))
 app.use(express.urlencoded({ extended: true }))
