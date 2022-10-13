@@ -10,7 +10,8 @@ const client = new MongoClient(url);
 app.get("/" , (req,res) => {
  
     var perPage = 7 ;
-    var page = req.query.p || 1 ;
+    var page = 1 ;
+    
     
     const database = client.db("ac-news");
     const news = database.collection("news");
@@ -31,10 +32,10 @@ app.get("/" , (req,res) => {
     });
 })
 
-app.get("/2" , (req,res) => {
+app.get("/dipen" , (req,res) => {
  
   var perPage = 7 ;
-  var page = req.query.p || 2 ;
+  var page = req.query.p ;
   
   const database = client.db("ac-news");
   const news = database.collection("news");

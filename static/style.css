@@ -1,4 +1,4 @@
-div {
+section {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,14 +33,14 @@ a.link {
     display: block;
 }
 
-div#sec1 {
+section#sec1 {
     background-color: rgb(207, 219, 237);
 }
 button{
     width: fit-content;
 }
 
-/* div.pagination{
+div.pagination{
     flex-direction: row;
 display: flex;
 justify-content: center;
@@ -59,9 +59,9 @@ justify-content: center;
     color: white;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;} */
+.pagination a:hover:not(.active) {background-color: #ddd;}
 
-.loadmore button {
+.loadmore a {
     border-radius: 9px;
     color: rgb(255, 255, 255);
     float: left;
@@ -71,7 +71,7 @@ justify-content: center;
     background-color: rgb(43, 41, 39);
 }
 
-.loadmore button:hover {
+.loadmore a:hover {
     background-color: rgb(207, 219, 237);
     color: black;
 }

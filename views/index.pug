@@ -20,7 +20,7 @@ head
                 li 
                     a(href='#contact') Contact
 
-    div#sec1
+    section#sec1
         ul#ul1
             each val in results
                 li#li1 <b>#{val.title}</b> (Category :-#{val.category})
@@ -29,9 +29,7 @@ head
                     <br>
                     a.link(href=`${val.url}`) Read More...
                     | <i>Published by #{val.author} at #{val.published_at}#{val.published}</i>
-                    a(href="?p=1")
                 <br>
                   
     div.loadmore
-        button(type='button' onclick="getData(this)")
-            | Load More
+        a( id="myAnchor" href="?p="+(Number(page)+1) onclick="getData(event);") Load More
