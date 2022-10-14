@@ -22,23 +22,28 @@ head
                     a(href='#contact') Contact
     
     section#sec1
-            form(action='/formdata' method= 'POST')
+            form(action='/formdata' method= 'POST' id="myForm")
                 table#table
                     tr
                         td.tdLabel
                             label.label Enter Title :
                         td#title
-                            input(type='text' name='title' value='' style='width:160px')
+                            input(type='text' name='title' value='' style='width:160px' required)
+                    tr
+                        td.tdLabel
+                            label.label Enter Category :
+                        td#category
+                            input(type='text' name='category' value='' style='width:160px' required)
                     tr
                         td.tdLabel
                             label.label Enter URL:
                         td#url
-                            input(type='text' name='url' style='width:160px')
+                            input(type='text' name='url' style='width:160px' required)
                     tr
                         td.tdLabel
                             label.label Enter Description :
                         td#desc
-                            textarea(name="desc", cols="30", rows="5") 
+                            textarea(name="description", cols="30", rows="5" required) 
                     tr
                         td(colspan='2')
                             button(type='submit' onclick="getFormData(event);") Submit
