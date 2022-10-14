@@ -3,6 +3,7 @@ head
     title Ac-News
     style 
         include ../static/style.css
+        include ../static/form.css
     script 
         include ../static/form.js
   
@@ -21,26 +22,26 @@ head
                     a(href='#contact') Contact
     
     section#sec1
-            form(action='/' method= 'POST')
-                table
-                    tr#title
-                    td.tdLabel
-                        label.label Enter Title :
-                    td
-                        input(type='text' name='title' value='' style='width:160px')
+            form(action='/formdata' method= 'POST')
+                table#table
                     tr
-                    td.tdLabel
-                        label.label Enter URL:
-                    td#url
-                        input(type='text' name='url' style='width:160px')
+                        td.tdLabel
+                            label.label Enter Title :
+                        td#title
+                            input(type='text' name='title' value='' style='width:160px')
                     tr
-                    td.tdLabel
-                        label.label Enter Description :
-                    td#desc
-                        textarea(name="desc", cols="30", rows="5") 
+                        td.tdLabel
+                            label.label Enter URL:
+                        td#url
+                            input(type='text' name='url' style='width:160px')
                     tr
-                    td(colspan='2')
-                        button(type='submit' onclick="getFormData();") Submit
+                        td.tdLabel
+                            label.label Enter Description :
+                        td#desc
+                            textarea(name="desc", cols="30", rows="5") 
+                    tr
+                        td(colspan='2')
+                            button(type='submit' onclick="getFormData(event);") Submit
 
 
                             

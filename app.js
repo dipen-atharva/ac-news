@@ -50,6 +50,19 @@ app.get("/2r" , (req,res) => {
 app.get("/form",(req,res) => {
   res.status(200).render("form")
 })
+
+app.post("/formdata" , (req,res) => {
+  const database = client.db("ac-news");
+  const news = database.collection("news");
+  news.insertMany( post, function (err, result) {
+    if (err)
+       res.send('Error');
+    else
+      res.send('Success');
+
+});
+})
+
 app.use('/static', express.static('static'))
 app.use(express.urlencoded({ extended: true }))
 
