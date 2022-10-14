@@ -70,6 +70,10 @@ app.post("/formdata", (req, res) => {
             <p>published-at${req.body.published_at}</p>`);
 })
 
+app.get('/auth', function (req, res) {
+  res.render('auth');
+});
+
 app.listen(port, () => {
   console.log(`The application started successfully on port ${port}`);
 });

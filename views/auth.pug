@@ -1,0 +1,27 @@
+doctype html
+head
+    title Ac-News Authentication
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
+    style 
+        include ../static/style.css
+    script 
+        include ../static/client.js
+
+    body
+      nav#navbar 
+            ul 
+                li 
+                    a(href='#ac-news') Ac-News
+                li 
+                    a.active(href='/') Home
+                li 
+                    a(href='/form') Upload News
+                li 
+                    a(href='#about') About
+                li 
+                    a(href='#contact') Contact
+
+      div.container
+        //- div(style='margin-top: 30px')
+        //-   a.btn.btn-primary.btn-lg.active(href='/login') Login
+        //-   a.btn.btn-primary.btn-lg.active(href='/register') Register
