@@ -10,7 +10,7 @@ function getFormData(e) {
     if (title == "" || category == "" || url == "" && description == "") {
         return false
     }
-    
+
     var data={
                 title:title,
                 url:url,
@@ -29,21 +29,5 @@ function getFormData(e) {
     
     form.reset();
 }
-
-
-
-
-
-
-
-
-
-
-
-    // xhttp.onload = function () {
-    //     if(xhttp.status === 201) {
-    //         console.log("Post successfully created!") 
-    //     }
-    // }
 
     

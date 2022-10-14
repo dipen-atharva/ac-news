@@ -28,25 +28,25 @@ head
                         td.tdLabel
                             label.label Enter Title :
                         td#title
-                            input(type='text' name='title' value='' style='width:160px' required)
+                            input(type='text' name='title' value=''  required)
                     tr
                         td.tdLabel
                             label.label Enter Category :
                         td#category
-                            input(type='text' name='category' value='' style='width:160px' required)
+                            input(type='text' name='category' value=''  required)
                     tr
                         td.tdLabel
                             label.label Enter URL:
                         td#url
-                            input(type='text' name='url' style='width:160px' required)
+                            input(type='text' name='url'  required)
                     tr
                         td.tdLabel
                             label.label Enter Description :
                         td#desc
-                            textarea(name="description", cols="30", rows="5" required) 
+                            textarea(name="description", cols="35", rows="5" required) 
                     tr
                         td(colspan='2')
-                            button(type='submit' onclick="getFormData(event);") Submit
+                            button#submit(type='submit' onclick="getFormData(event);") Submit
 
 
                             
