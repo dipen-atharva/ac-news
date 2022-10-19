@@ -1,14 +1,18 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const cookieParser = require("cookie-parser");
+const session = require('express-session');
 const path = require('path')
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/ac-news"
 const port = 4000;
 const client = new MongoClient(url);
+let isLogged  = 0 ;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use('/static', express.static('static'))
 app.use(express.urlencoded({ extended: true }))
@@ -55,9 +59,13 @@ app.get("/2r", (req, res) => {
   });
 })
 
-app.get("/form", (req, res) => {
-  res.status(200).render("form")
-})
+app.get("/protected_page", (req, res) => {
+  if (isLogged == 1) {
+    res.status(200).render("protected_page");
+  } else {
+    res.redirect('/auth')
+  }
+});
 
 app.post("/formdata", (req, res) => {
   const database = client.db("ac-news");
@@ -68,11 +76,34 @@ app.post("/formdata", (req, res) => {
             <p>url ${req.body.url}</p>
             <p>desc ${req.body.description}</p>
             <p>published-at${req.body.published_at}</p>`);
+});
+
+app.get('/auth',(req,res) => {
+      res.status(200).render("auth")
 })
 
-app.get('/auth', function (req, res) {
-  res.render('auth');
-});
+
+
+app.post("/authdata",(req,res) => {
+  const {username , password } = req.body;
+  const userdetails = {
+    username : "dipen" ,
+    password : "123"
+  }
+  if (username === userdetails.username && password === userdetails.password) {
+    res.cookie('username' , username );
+    isLogged = 1 ;
+    res.redirect('protected_page');
+  } else {
+    res.redirect("/auth");
+  }
+})
+
+app.get("/logout",(req,res) => {
+  res.clearCookie('username');
+  isLogged = 0;
+  res.redirect('/auth');
+})
 
 app.listen(port, () => {
   console.log(`The application started successfully on port ${port}`);

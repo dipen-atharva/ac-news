@@ -15,11 +15,13 @@ head
                 li 
                     a.active(href='/') Home
                 li 
-                    a(href='/form') Upload News
-                li 
-                    a(href='#about') About
+                    a(href='/protected_page') Upload News
+                //- li 
+                //-     a(href='/auth') About
                 li 
                     a(href='#contact') Contact
+                li 
+                    a(href='/logout') Log Out
     
     section#sec1
             form(action='/formdata' method= 'POST' id="myForm")
