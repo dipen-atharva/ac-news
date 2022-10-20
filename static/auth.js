@@ -22,7 +22,7 @@ function getLoginData(e) {
 }
 
 function getCreateData(e) {
-    e.preventDefault();
+    // e.preventDefault();
     const form = document.getElementById('new');
 
     const username = document.getElementById("table2").rows[0].cells[1].firstChild.value;

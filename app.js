@@ -8,7 +8,7 @@ const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/ac-news"
 const port = 4000;
 const client = new MongoClient(url);
-let isLogged  = 0 ;
+let isLogged = 0;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -78,28 +78,26 @@ app.post("/formdata", (req, res) => {
             <p>published-at${req.body.published_at}</p>`);
 });
 
-app.get('/auth',(req,res) => {
-      res.status(200).render("auth")
+app.get('/auth', (req, res) => {
+  res.status(200).render("auth")
 })
 
-
-
-app.post("/authdata",(req,res) => {
-  const {username , password } = req.body;
-  const userdetails = {
-    username : "dipen" ,
-    password : "123"
-  }
+app.post("/authdata", async (req, res) => {
+  const database = client.db("ac-news");
+  const userDetails = database.collection("userDetails");
+  const { username, password } = req.body;
+  let userdetails = await userDetails.findOne({'username':`${username}`})
+  console.log(userdetails);
   if (username === userdetails.username && password === userdetails.password) {
-    res.cookie('username' , username );
-    isLogged = 1 ;
+    res.cookie('username', username);
+    isLogged = 1;
     res.redirect('protected_page');
   } else {
     res.redirect("/auth");
   }
-})
+});
 
-app.get("/logout",(req,res) => {
+app.get("/logout", (req, res) => {
   res.clearCookie('username');
   isLogged = 0;
   res.redirect('/auth');

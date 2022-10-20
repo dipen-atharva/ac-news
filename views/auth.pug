@@ -16,8 +16,6 @@ head
                     a.active(href='/') Home
                 li 
                     a(href='/protected_page') Upload News
-                //- li 
-                //-     a(href='/auth') About
                 li 
                     a(href='#contact') Contact
                 li 
@@ -41,21 +39,21 @@ head
                     td(colspan='2')
                         button#submit(type='submit' onclick="getLoginData(this);") Login   
 
-        //- form(action='/authdata' method= 'POST' id="new")          
-        //-     table#table2
-        //-         tr
-        //-             h2 Create Account
-        //-             td.tdLabel
-        //-                 label.label Enter Username :
-        //-             td#title
-        //-                 input(type='text' name='username' value=''  required)
-        //-         tr
-        //-             td.tdLabel
-        //-                 label.label Enter Password :
-        //-             td#category
-        //-                 input(type='password' name='password' value=''  required)
-        //-         tr
-        //-             td(colspan='2')
-        //-                     button#submit(type='submit' onclick="getCreateData(event);") Create Account
+        form(action='/authdata' method= 'POST' id="new")          
+            table#table2
+                tr
+                    h2 Create Account
+                    td.tdLabel
+                        label.label Enter Username :
+                    td#title
+                        input(type='text' name='username' value=''  required)
+                tr
+                    td.tdLabel
+                        label.label Enter Password :
+                    td#category
+                        input(type='password' name='password' value=''  required)
+                tr
+                    td(colspan='2')
+                            button#submit(type='submit' onclick="getCreateData(this);") Create Account
 
     
