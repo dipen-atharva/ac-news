@@ -82,19 +82,21 @@ app.get('/auth', (req, res) => {
   res.status(200).render("auth")
 })
 
-app.post("/authdata", async (req, res) => {
+app.post("/authdata", (req, res) => {
   const database = client.db("ac-news");
   const userDetails = database.collection("userDetails");
   const { username, password } = req.body;
-  let userdetails = await userDetails.findOne({'username':`${username}`})
-  console.log(userdetails);
-  if (username === userdetails.username && password === userdetails.password) {
-    res.cookie('username', username);
-    isLogged = 1;
-    res.redirect('protected_page');
-  } else {
-    res.redirect("/auth");
-  }
+  userDetails.findOne({ 'username': `${username}` })
+    .then((userdetails) => {
+      console.log(userdetails)
+      if (username === userdetails.username && password === userdetails.password) {
+        res.cookie('username', username);
+        isLogged = 1;
+        res.redirect('protected_page');
+      } else {
+        res.redirect("/auth");
+      }
+    });
 });
 
 app.get("/logout", (req, res) => {
