@@ -34,7 +34,7 @@ function getCreateData(e) {
              }
     let post = JSON.stringify(data)
     
-    const link = "/authdata" ;
+    const link = "/authdata2" ;
     const xhttp = new XMLHttpRequest();
     
     xhttp.open('POST',link, true);
