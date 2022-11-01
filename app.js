@@ -2,9 +2,11 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-// const session = require('express-session');
+const sessions = require('express-session');
 const isLoggedIn = require("./middleware/isLoggedIn.js");
 const path = require('path');
+const oneDay = 1000 * 60 * 60 * 24;
+
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost:27017/ac-news';
 const port = 4000;
@@ -16,9 +18,16 @@ client.on('commandFailed', (event) => console.debug(event));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
-
 app.use('/static', express.static('static'))
 app.use(express.urlencoded({ extended: true }))
+app.use(sessions({
+  secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+  saveUninitialized:true,
+  cookie: { maxAge: oneDay },
+  resave: false
+}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
