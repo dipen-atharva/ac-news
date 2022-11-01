@@ -19,7 +19,7 @@ head
                 li 
                     a(href='#contact') Contact
                 li 
-                    a(href='/logout') Log Out
+                    a(href='/logout') Log In/Out
 
     div.container
         form(action='/authdata' method= 'POST' id="exist")
@@ -37,7 +37,7 @@ head
                         input(type='password' name='password' value=''  required)
                 tr
                     td(colspan='2')
-                        button#submit(type='submit' onclick="getLoginData(this);") Login   
+                        button#submit(type='submit' onclick="getLoginData(this);") Log in   
 
         form(action='/authdata2' method= 'POST' id="new")          
             table#table2

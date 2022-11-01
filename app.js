@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 // const session = require('express-session');
+const isLoggedIn = require("./middleware/isLoggedIn.js");
 const path = require('path');
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost:27017/ac-news';
@@ -11,8 +12,6 @@ const client = new MongoClient(url, { monitorCommands: true });
 client.on('commandStarted', (event) => console.debug(event));
 client.on('commandSucceeded', (event) => console.debug(event));
 client.on('commandFailed', (event) => console.debug(event));
-
-
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -24,8 +23,7 @@ app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
 
-app.get('/', (req, res) => {
-
+app.get('/',(req, res) => {
   var perPage = 7
   var page = 1
   const database = client.db('ac-news')
@@ -44,7 +42,7 @@ app.get('/', (req, res) => {
   })
 })
 
-app.get('/2r', (req, res) => {
+app.get('/2r',isLoggedIn ,(req, res) => {
 
   var perPage = 7
   var page = req.query.p
@@ -64,17 +62,12 @@ app.get('/2r', (req, res) => {
   })
 })
 
-app.get('/protected_page', (req, res) => {
-  var cookie = req.cookies;
-  const database = client.db('ac-news')
-  const userDetails = database.collection('userDetails')
-  userDetails.findOne({ 'username': `${cookie.username}` }).then((userdetails) => {
-    if (cookie.username && cookie.username == userdetails.username) {
-      res.status(200).render('protected_page')
-    } else {
-      res.redirect('/auth')
-    }
-  });
+app.get('/protected_page', isLoggedIn ,(req, res) => {
+  if (isLoggedIn) {
+    res.status(200).render('protected_page')
+  } else {
+    res.redirect('/auth')
+  }
 })
 
 app.post('/formdata', (req, res) => {
