@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const sessions = require('express-session');
+const MongoStore = require('connect-mongo');
 const isLoggedIn = require("./middleware/isLoggedIn.js");
 const path = require('path');
 const oneDay = 1000 * 60 * 60 * 24;
@@ -20,11 +21,15 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use('/static', express.static('static'))
 app.use(express.urlencoded({ extended: true }))
+
 app.use(sessions({
-  secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-  saveUninitialized:true,
-  cookie: { maxAge: oneDay },
-  resave: false
+  secret: 'a1b2c3d4e5f6',
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({
+    mongoUrl: 'mongodb://localhost:27017/ac-news',
+    autoRemove: 'native'
+  })
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -32,7 +37,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
 
-app.get('/',(req, res) => {
+app.get('/', (req, res) => {
   var perPage = 7
   var page = 1
   const database = client.db('ac-news')
@@ -51,7 +56,7 @@ app.get('/',(req, res) => {
   })
 })
 
-app.get('/2r',isLoggedIn ,(req, res) => {
+app.get('/2r', isLoggedIn, (req, res) => {
 
   var perPage = 7
   var page = req.query.p
@@ -71,7 +76,7 @@ app.get('/2r',isLoggedIn ,(req, res) => {
   })
 })
 
-app.get('/protected_page', isLoggedIn ,(req, res) => {
+app.get('/protected_page', isLoggedIn, (req, res) => {
   if (isLoggedIn) {
     res.status(200).render('protected_page')
   } else {
@@ -94,18 +99,19 @@ app.get('/auth', (req, res) => {
   res.status(200).render('auth')
 })
 
+
 app.post('/authdata', (req, res) => {
   const database = client.db('ac-news')
   const userDetails = database.collection('userDetails')
   const { username, password } = req.body
-  // console.log('username'+ `${username}`)
   userDetails.findOne({ 'username': `${username}` })
     .then((userdetails) => {
       console.log(userdetails)
+
       if (username === userdetails.username && password === userdetails.password) {
-        res.cookie('username', username)
+        req.session.userId = req.body.username;
+        console.log("+++++++++CREATED++", req.session, req.session.userId)
         res.redirect('protected_page')
-        // res.status(200).render('protected_page')
       } else {
         res.redirect('/auth')
       }
@@ -123,7 +129,8 @@ app.post('/authdata2', (req, res) => {
       userDetails.insertOne({ 'username': `${username}`, 'password': `${password}` })
         .then((userdetail) => {
           console.log(userdetail)
-          res.cookie('username', username)
+          req.session.userId = req.body.username;
+          console.log("+++++++++CREATED++", req.session, req.session.userId)
           res.status(200).render('protected_page')
         })
     }
@@ -131,10 +138,16 @@ app.post('/authdata2', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-  res.clearCookie('username')
-  res.redirect('/auth')
-})
+  req.session.destroy(err => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Session is destroyed')
+      res.redirect('/auth')
+    }
+  });
+});
 
 app.listen(port, () => {
   console.log(`The application started successfully on port ${port}`)
-})
+});
