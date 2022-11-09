@@ -1,0 +1,59 @@
+doctype html
+head
+    title Ac-News Authentication
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
+    style 
+        include ../static/style.css
+    script 
+        include ../static/auth.js
+
+    body
+      nav#navbar 
+            ul 
+                li 
+                    a(href='#ac-news') Ac-News
+                li 
+                    a.active(href='/') Home
+                li 
+                    a(href='/protected_page') Upload News
+                li 
+                    a(href='#contact') Contact
+                li 
+                    a(href='/logout') Log In/Out
+
+    div.container
+        form(action='/authdata' method= 'POST' id="exist")
+            table#table
+                tr
+                    h2 Login
+                    td.tdLabel
+                        label.label Enter Username :
+                    td#title
+                        input(type='text' name='username' value=''  required)
+                tr
+                    td.tdLabel
+                        label.label Enter Password :
+                    td#category
+                        input(type='password' name='password' value=''  required)
+                tr
+                    td(colspan='2')
+                        button#submit(type='submit' onclick="getLoginData(this);") Log in   
+
+        form(action='/authdata2' method= 'POST' id="new")          
+            table#table2
+                tr
+                    h2 Create Account
+                    td.tdLabel
+                        label.label Enter Username :
+                    td#title
+                        input(type='text' name='username' value=''  required)
+                tr
+                    td.tdLabel
+                        label.label Enter Password :
+                    td#category
+                        input(type='password' name='password' value=''  required)
+                tr
+                    td(colspan='2')
+                            button#submit(type='submit' onclick="getCreateData(this);") Create Account
+
+    
