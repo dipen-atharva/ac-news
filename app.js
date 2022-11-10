@@ -12,9 +12,9 @@ const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost:27017/ac-news';
 const port = 4000;
 const client = new MongoClient(url, { monitorCommands: true });
-client.on('commandStarted', (event) => console.debug(event));
-client.on('commandSucceeded', (event) => console.debug(event));
-client.on('commandFailed', (event) => console.debug(event));
+// client.on('commandStarted', (event) => console.debug(event));
+// client.on('commandSucceeded', (event) => console.debug(event));
+// client.on('commandFailed', (event) => console.debug(event));
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -99,7 +99,7 @@ app.get('/auth', (req, res) => {
   res.status(200).render('auth')
 })
 
-
+// LOGIN
 app.post('/authdata', (req, res) => {
   const database = client.db('ac-news')
   const userDetails = database.collection('userDetails')
@@ -107,17 +107,20 @@ app.post('/authdata', (req, res) => {
   userDetails.findOne({ 'username': `${username}` })
     .then((userdetails) => {
       console.log(userdetails)
-
-      if (username === userdetails.username && password === userdetails.password) {
+      if (username == userdetails.username && password == userdetails.password) {
         req.session.userId = req.body.username;
-        console.log("+++++++++CREATED++", req.session, req.session.userId)
+        console.log("++CREATED++", req.session, req.session.userId)
         res.redirect('protected_page')
       } else {
         res.redirect('/auth')
       }
+    }).catch(err => {
+      res.send(`Account with ${username} username don't exist.`)
+      console.log(err)
     })
 })
 
+// CREATE ACCOUNT
 app.post('/authdata2', (req, res) => {
   const database = client.db('ac-news')
   const userDetails = database.collection('userDetails')
