@@ -12,9 +12,9 @@ const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost:27017/ac-news';
 const port = 4000;
 const client = new MongoClient(url, { monitorCommands: true });
-// client.on('commandStarted', (event) => console.debug(event));
-// client.on('commandSucceeded', (event) => console.debug(event));
-// client.on('commandFailed', (event) => console.debug(event));
+client.on('commandStarted', (event) => console.debug(event));
+client.on('commandSucceeded', (event) => console.debug(event));
+client.on('commandFailed', (event) => console.debug(event));
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
