@@ -7,14 +7,23 @@ const MongoStore = require('connect-mongo');
 const isLoggedIn = require("./middleware/isLoggedIn.js");
 const path = require('path');
 const oneDay = 1000 * 60 * 60 * 24;
-
-const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017/ac-news';
 const port = 4000;
-const client = new MongoClient(url, { monitorCommands: true });
-// client.on('commandStarted', (event) => console.debug(event));
-// client.on('commandSucceeded', (event) => console.debug(event));
-// client.on('commandFailed', (event) => console.debug(event));
+const mongoose = require('mongoose');
+const url = 'mongodb://localhost:27017/ac-news';
+const News = require('./models/news');
+const userDetails = require('./models/userDetails');
+
+function connect() {
+  mongoose.connection
+    .on('error', console.log)
+    .on('disconnected', connect);
+  return mongoose.connect(url, {
+    keepAlive: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+}
+connect();
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -40,40 +49,34 @@ app.set('views', path.join(__dirname, 'views'))
 app.get('/', (req, res) => {
   var perPage = 7
   var page = 1
-  const database = client.db('ac-news')
-  const news = database.collection('news')
-  const query = {}
-  const cursor = news.find(query)
+  News.find({})
     .skip((perPage * page) - perPage)
     .limit(perPage)
-  let results = []
-  cursor.forEach(value => results.push(value)).then(() => {
-    res.status(200).render('index', {
-      results,
-      perPage,
-      page
-    })
-  })
+    .exec(function (err, doc) {
+      if (err) { res.status(500).json(err); return; };
+      res.status(200).render('index', {
+        doc,
+        perPage,
+        page
+      })
+    });
 })
 
 app.get('/2r', isLoggedIn, (req, res) => {
 
   var perPage = 7
   var page = req.query.p
-  const database = client.db('ac-news')
-  const news = database.collection('news')
-  const query = {}
-  const cursor = news.find(query)
+  News.find({})
     .skip((perPage * page) - perPage)
     .limit(perPage)
-  let results = []
-  cursor.forEach(value => results.push(value)).then(() => {
-    res.status(200).render('index2', {
-      results,
-      perPage,
-      page
-    })
-  })
+    .exec(function (err, doc) {
+      if (err) { res.status(500).json(err); return; };
+      res.status(200).render('index2', {
+        doc,
+        perPage,
+        page
+      })
+    });
 })
 
 app.get('/protected_page', isLoggedIn, (req, res) => {
@@ -85,9 +88,7 @@ app.get('/protected_page', isLoggedIn, (req, res) => {
 })
 
 app.post('/formdata', (req, res) => {
-  const database = client.db('ac-news')
-  const news = database.collection('news')
-  news.insertOne(req.body)
+  News.create(req.body)
   res.send(`<p>title ${req.body.title}</p>
             <p>category ${req.body.category}</p>
             <p>url ${req.body.url}</p>
@@ -101,8 +102,6 @@ app.get('/auth', (req, res) => {
 
 // LOGIN
 app.post('/authdata', (req, res) => {
-  const database = client.db('ac-news')
-  const userDetails = database.collection('userDetails')
   const { username, password } = req.body
   userDetails.findOne({ 'username': `${username}` })
     .then((userdetails) => {
@@ -122,14 +121,12 @@ app.post('/authdata', (req, res) => {
 
 // CREATE ACCOUNT
 app.post('/authdata2', (req, res) => {
-  const database = client.db('ac-news')
-  const userDetails = database.collection('userDetails')
   const { username, password } = req.body
   userDetails.findOne({ 'username': `${username}` }).then((userdetails) => {
     if (userdetails && username === userdetails.username) {
       res.send('username already exists');
     } else {
-      userDetails.insertOne({ 'username': `${username}`, 'password': `${password}` })
+      userDetails.create({ 'username': `${username}`, 'password': `${password}` })
         .then((userdetail) => {
           console.log(userdetail)
           req.session.userId = req.body.username;

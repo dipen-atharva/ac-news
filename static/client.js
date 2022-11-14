@@ -1,5 +1,5 @@
-var count  = 1 ; 
-function getData(e) { 
+var count  = 1 ;
+function getData(e) {
   e.preventDefault()
   const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -7,9 +7,6 @@ function getData(e) {
       document.getElementById("ul1").innerHTML += this.responseText;
     }
   };
-  // var val = document.getElementById("myAnchor").getAttribute("href");  
-  // var pageNumber = val.split( "=")[1];
-  // console.log(pageNumber); 
   count++;
   console.log(count)
   xhttp.open("GET", `http://localhost:4000/2r?p=${count}` );

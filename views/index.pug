@@ -1,35 +1,35 @@
 doctype html
 head
     title Ac-News
-    style 
+    style
         include ../static/style.css
-    script 
+    script
         include ../static/client.js
-  
+
     body
-        nav#navbar 
-            ul 
-                li 
+        nav#navbar
+            ul
+                li
                     a(href='#ac-news') Ac-News
-                li 
+                li
                     a.active(href='#home') Home
-                li 
+                li
                     a(href='/protected_page') Upload News
-                li 
+                li
                     a(href='#contact') Contact
-                li 
+                li
                     a(href='/logout') Log In/Out
 
     section#sec1
         ul#ul1
-            each val in results
+            each val in doc
                 li#li1 <b>#{val.title}</b> (Category :-#{val.category})
-                    <br>  
-                    | #{val.description} 
+                    <br>
+                    | #{val.description}
                     <br>
                     a.link(href=`${val.url}`) Read More...
                     | <i>Published by #{val.author} at #{val.published_at}#{val.published}</i>
                 <br>
-                  
+
     div.loadmore
         a( id="myAnchor" href="?p="+(Number(page)+1) onclick="getData(event);") Load More
