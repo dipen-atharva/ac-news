@@ -107,9 +107,11 @@ app.post('/authdata', (req, res) => {
   const { username, password } = req.body
   userDetails.findOne({ 'username': `${username}` })
     .then((userdetails) => {
+      console.time("scrypt genrating hash with salt");
       scrypt(password, userdetails.password_salt, 64, (err, derivedKey) => {
         if (err) throw err;
         body_password = derivedKey.toString('hex');
+        console.timeEnd("scrypt genrating hash with salt");
         if (body_password === userdetails.password) {
           req.session.userId = req.body.username;
           console.log("++CREATED++", req.session, req.session.userId)
