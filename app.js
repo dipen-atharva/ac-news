@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
 const url = 'mongodb://localhost:27017/ac-news';
 const News = require('./models/news');
 const userDetails = require('./models/userDetails');
-const bcrypt = require("bcrypt");
+const { scrypt } = require('node:crypto');
 
 //  Database Connection
 function connect() {
@@ -107,17 +107,17 @@ app.post('/authdata', (req, res) => {
   const { username, password } = req.body
   userDetails.findOne({ 'username': `${username}` })
     .then((userdetails) => {
-      bcrypt.compare(password, userdetails.password)
-        .then((result) => {
-          console.log(result)
+      scrypt(password, userdetails.password_salt, 64, (err, derivedKey) => {
+        if (err) throw err;
+        body_password = derivedKey.toString('hex');
+        if (body_password === userdetails.password) {
           req.session.userId = req.body.username;
           console.log("++CREATED++", req.session, req.session.userId)
-          if (result) {
-            res.redirect('protected_page')
-          } else {
-            res.redirect('/auth')
-          }
-        })
+          res.redirect('protected_page')
+        } else {
+          res.redirect('/auth')
+        }
+      })
     }).catch(err => {
       res.send(`Account with ${username} username don't exist.`)
       console.log(err)
@@ -132,8 +132,7 @@ app.post('/authdata2', (req, res) => {
       res.send('username already exists');
     } else {
       userDetails.create({ 'username': `${username}`, 'password': `${password}` })
-        .then((userdetail) => {
-          // console.log(userdetail)
+        .then(() => {
           req.session.userId = req.body.username;
           console.log("+++++++++CREATED++", req.session, req.session.userId)
           res.status(200).render('protected_page')
