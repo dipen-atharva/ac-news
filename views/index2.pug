@@ -1,16 +1,16 @@
 doctype html
 head
-    title Ac-News
-    style
-        include ../static/style.css
-    script
-        include ../static/client.js
-
-    each val in doc
-        li#li1 <b>#{val.title}</b> (Category :-#{val.category})
-            <br>
-            | #{val.description}
-            <br>
-            a.link(href=`${val.url}`) Read More...
-            | <i>Published by #{val.author} at #{val.published_at}#{val.published}</i>
-        <br>
+  title Ac-News
+  style
+    include ../static/style.css
+  script
+    include ../static/client.js
+  link(href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet")
+  each val in doc
+    li#li1 <b>#{val.title}</b> (Category :-#{val.category})
+      <br>
+      | #{val.description}
+      <br>
+      a.link(href=`${val.url}`) Read More...
+      | <i>Published by #{val.author} at #{val.published_at}#{val.published}</i>
+    <br>

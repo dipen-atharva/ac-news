@@ -18,6 +18,7 @@ const { scrypt } = require('node:crypto');
 function connect() {
   mongoose.connection
     .on('error', console.log)
+
     .on('disconnected', connect);
   return mongoose.connect(url, {
     keepAlive: true,
@@ -102,6 +103,7 @@ app.get('/auth', (req, res) => {
   res.status(200).render('auth')
 })
 
+
 // LOGIN
 app.post('/authdata', (req, res) => {
   const { username, password } = req.body
@@ -117,6 +119,8 @@ app.post('/authdata', (req, res) => {
           console.log("++CREATED++", req.session, req.session.userId)
           res.redirect('protected_page')
         } else {
+
+
           res.redirect('/auth')
         }
       })

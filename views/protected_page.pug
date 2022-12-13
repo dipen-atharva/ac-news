@@ -1,52 +1,57 @@
 doctype html
 head
-    title Ac-News
-    style 
-        include ../static/style.css
-        include ../static/form.css
-    script 
-        include ../static/form.js
-  
-    body
-        nav#navbar 
-            ul 
-                li 
-                    a(href='#ac-news') Ac-News
-                li 
-                    a.active(href='/') Home
-                li 
-                    a(href='/protected_page') Upload News
-                li 
-                    a(href='#contact') Contact
-                li 
-                    a(href='/logout') Log In/Out
-    
-    section#sec1
-            form(action='/formdata' method= 'POST' id="myForm")
-                table#table
-                    tr
-                        td.tdLabel
-                            label.label Enter Title :
-                        td#title
-                            input(type='text' name='title' value=''  required)
-                    tr
-                        td.tdLabel
-                            label.label Enter Category :
-                        td#category
-                            input(type='text' name='category' value=''  required)
-                    tr
-                        td.tdLabel
-                            label.label Enter URL:
-                        td#url
-                            input(type='text' name='url'  required)
-                    tr
-                        td.tdLabel
-                            label.label Enter Description :
-                        td#desc
-                            textarea(name="description", cols="35", rows="5" required) 
-                    tr
-                        td(colspan='2')
-                            button#submit(type='submit' onclick="getFormData(event);") Submit
+  title Ac-News
+  style
+    include ../static/style.css
+    include ../static/form.css
+  script
+    include ../static/form.js
+  link(href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet")
 
 
-                            
+
+  body
+    nav#navbar
+      ul
+        li
+          p#logo Ac-News
+        li
+          a.active(href='/') Home
+        li
+          a(href='/protected_page') Upload News
+        li
+          a(href='#contact') Contact
+        li.nav-right
+          a(href='/logout') Log In/Out
+
+  section#sec1
+    form(action='/formdata' method= 'POST' id="myForm")
+      table#table
+        tr
+          td.tdLabel
+            label.label Enter Title :
+          td#title
+            input(type='text' name='title' value=''  required)
+        tr
+          td.tdLabel
+            label.label Enter Category :
+          td#category
+            input(type='text' name='category' value=''  required)
+        tr
+          td.tdLabel
+            label.label Enter URL:
+          td#url
+            input(type='text' name='url'  required)
+        tr
+          td.tdLabel
+            label.label Enter Description :
+          td#desc
+            textarea(name="description" cols="35" rows="5" required)
+        tr
+          td(colspan='2')
+            button#submit(type='reset' onclick="getFormData();") Submit
+          td(colspan='2')
+            button#reset(type='reset') Reset
+
+
+

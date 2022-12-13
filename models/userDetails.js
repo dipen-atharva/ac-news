@@ -25,5 +25,5 @@ UserDetails.pre("save", function (next) {
   }
 })
 
-
 module.exports = mongoose.model('userDetails', UserDetails);
+
