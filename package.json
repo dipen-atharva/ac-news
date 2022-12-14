@@ -6,8 +6,8 @@
   "scripts": {
     "startdev": "nodemon app",
     "start": "node app",
-    "build": "NODE_ENV=production postcss static/main.css -o static/styles.css",
-    "dev": "postcss static/main.css -o static/styles.css -w"
+    "build": "NODE_ENV=production postcss static/main.css -o static/output.css",
+    "dev": "postcss static/main.css -o static/output.css -w"
   },
   "author": "",
   "license": "ISC",

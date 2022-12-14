@@ -4,8 +4,7 @@ head
   link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
   style
     include ../static/style.css
-    include ../static/styles.css
-    //- include ../static/output.css
+    include ../static/output.css
   script
     include ../static/auth.js
 
@@ -56,5 +55,5 @@ head
             input(type='password' name='password' value=''  required)
         tr
           td(colspan='2' style="padding-bottom: 75px;")
-            button#logInCreate(type='submit' onclick="getCreateData(this);" ) Create Account
+            button#logInCreate(type='submit' onclick="getCreateData(this);"  ) Create Account
 
