@@ -1,12 +1,14 @@
-doctype html
-head
-  title Ac-News
-  style
-    include ../static/style.css
-    include ../static/main.css
-  script
-    include ../static/client.js
-  link(href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet")
+extends layout.pug
+
+block append styles
+  link(rel="stylesheet" href="../static/style.css")
+  link(rel="stylesheet" href="../static/main.css")
+
+block scripts
+  script(src='../static/client.js')
+
+block content
+  br
   each val in doc
     li#li1 <b>#{val.title}</b> (Category :-#{val.category})
       <br>

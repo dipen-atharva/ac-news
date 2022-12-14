@@ -1,13 +1,14 @@
-doctype html
-head
-  title Ac-News
-  style
-    include ../static/style.css
-    include ../static/form.css
-    include ../static/main.css
-  script
-    include ../static/form.js
+extends layout.pug
 
+block append styles
+  link(rel="stylesheet" href="../static/style.css")
+  link(rel="stylesheet" href="../static/form.css")
+  link(rel="stylesheet" href="../static/main.css")
+
+block scripts
+  script(src='../static/form.js')
+
+block content
   body
     nav#navbar
       ul

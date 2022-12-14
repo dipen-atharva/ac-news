@@ -1,0 +1,21 @@
+doctype html
+head
+  title Ac-News
+  block scripts
+  block styles
+
+  body
+    nav#navbar
+      ul
+        li
+          p#logo Ac-News
+        li
+          a.active(href='/') Home
+        li
+          a(href='/protected_page') Upload News
+        li
+          a(href='#contact') Contact
+        li.nav-right
+          a(href='/logout') Log In/Out
+
+  block content
