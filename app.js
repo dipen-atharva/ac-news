@@ -14,6 +14,7 @@ const News = require('./models/news');
 const userDetails = require('./models/userDetails');
 const { scrypt } = require('node:crypto');
 
+
 //  Database Connection
 function connect() {
   mongoose.connection
@@ -107,6 +108,7 @@ app.get('/auth', (req, res) => {
 // LOGIN
 app.post('/authdata', (req, res) => {
   const { username, password } = req.body
+  console.log("+++++++++authdata++", username, password)
   userDetails.findOne({ 'username': `${username}` })
     .then((userdetails) => {
       console.time("scrypt genrating hash with salt");
@@ -117,31 +119,29 @@ app.post('/authdata', (req, res) => {
         if (body_password === userdetails.password) {
           req.session.userId = req.body.username;
           console.log("++CREATED++", req.session, req.session.userId)
-          res.redirect('protected_page')
-        } else {
-
-
-          res.redirect('/auth')
+          res.status(200).send({result: 'redirect', url:'/protected_page'})
         }
       })
     }).catch(err => {
-      res.send(`Account with ${username} username don't exist.`)
       console.log(err)
+      console.log(`Account with ${username} username don't exist.`)
+      res.status(401).send({result: 'error' , error_message : `Account with <b>${username}</b> username don't exist.`})
     })
 })
 
 // CREATE ACCOUNT
 app.post('/authdata2', (req, res) => {
   const { username, password } = req.body
+  console.log("+++++++++authdata2++", username, password)
   userDetails.findOne({ 'username': `${username}` }).then((userdetails) => {
     if (userdetails && username === userdetails.username) {
-      res.send('username already exists');
+      res.status(401).send({result: 'error' , error_message : `<b>${username}</b> username already exist.`});
     } else {
       userDetails.create({ 'username': `${username}`, 'password': `${password}` })
         .then(() => {
           req.session.userId = req.body.username;
           console.log("+++++++++CREATED++", req.session, req.session.userId)
-          res.status(200).render('protected_page')
+          res.status(200).send({result: 'redirect', url:'/protected_page'})
         })
     }
   })
