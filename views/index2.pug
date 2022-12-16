@@ -1,19 +1,14 @@
-extends layout.pug
+doctype html
+head
+  title Ac-News
+  link(rel="stylesheet" href="../static/output.css")
 
-block append styles
-  link(rel="stylesheet" href="../static/style.css")
-  link(rel="stylesheet" href="../static/main.css")
-
-block scripts
-  script(src='../static/client.js')
-
-block content
-  br
-  each val in doc
-    li#li1 <b>#{val.title}</b> (Category :-#{val.category})
+  body
+    each val in doc
+      li#li1 <b>#{val.title}</b> (Category :-#{val.category})
+        <br>
+        | #{val.description}
+        <br>
+        a.link.text-red-500(href=`${val.url}`) Read More...
+        | <i>Published by #{val.author} at #{val.published_at}#{val.published}</i>
       <br>
-      | #{val.description}
-      <br>
-      a.link(href=`${val.url}`) Read More...
-      | <i>Published by #{val.author} at #{val.published_at}#{val.published}</i>
-    <br>

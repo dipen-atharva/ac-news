@@ -8,16 +8,17 @@ block scripts
   script(src='../static/client.js')
 
 block content
-  section#sec1
-    ul#ul1
+  section(class="w-fit bg-blue-200 mx-auto text-xl flex flex-col")
+    ul#ul1(class= "ml-10 mt-4 list-decimal font-serif")
       each val in doc
-        li#li1 <b>#{val.title}</b> (Category :-#{val.category})
+        li#li1(class="")
+          <b>#{val.title}</b> (Category :-#{val.category})
           <br>
           | #{val.description}
           <br>
-          a.link(href=`${val.url}`) Read More...
+          a.link.text-red-500(href=`${val.url}`) Read More...
           | <i>Published by #{val.author} at #{val.published_at}#{val.published}</i>
         <br>
 
-  div.loadmore
-    a( id="myAnchor" href="?p="+(Number(page)+1) onclick="getData(event);") Load More
+    div.loadmore(class = "rounded-lg bg-blue-300 w-fit text-lg p-1 ml-1 mt-0  hover:bg-blue-500 hover:text-white ")
+      a( id="myAnchor" href="?p="+(Number(page)+1) onclick="getData(event);") Load More

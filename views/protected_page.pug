@@ -9,48 +9,37 @@ block scripts
   script(src='../static/form.js')
 
 block content
-  body
-    nav#navbar
-      ul
-        li
-          p#logo Ac-News
-        li
-          a.active(href='/') Home
-        li
-          a(href='/protected_page') Upload News
-        li
-          a(href='#contact') Contact
-        li.nav-right
-          a(href='/logout') Log In/Out
-
-  section#sec1
-    form(action='/formdata' method= 'POST' id="myForm")
-      table#table
+  section#sec1(class=" bg-gradient-to-r from-cyan-200 to-blue-400 px-8 pt-6 pb-8 mb-4 rounded-3xl w-fit m-auto mt-20" style=" box-shadow: 0px 0px 19px 9px rgb(80, 154, 249);")
+    form(action='/formdata' method= 'POST' id="myForm" class=" text-gray-700 font-bold")
+      h2.text-center.m-5.p-5.uppercase.font-mono.text-4xl Create News Article
+      table#table(class="text-2xl border-separate border-spacing-8")
         tr
           td.tdLabel
             label.label Enter Title :
           td#title
-            input(type='text' name='title' value=''  required)
+            input(type='text' name='title' value='' class="hover:custom-shadow rounded-lg font-light" style= "width: -moz-available; hover: " required)
         tr
           td.tdLabel
             label.label Enter Category :
           td#category
-            input(type='text' name='category' value=''  required)
+            input(type='text' name='category' class="hover:custom-shadow rounded-lg font-light" style= "width: -moz-available;" value=''  required)
+
         tr
           td.tdLabel
             label.label Enter URL:
           td#url
-            input(type='text' name='url'  required)
+            input(type='text' name='url' class="hover:custom-shadow rounded-lg font-light" style= "width: -moz-available;" required)
+
         tr
           td.tdLabel
             label.label Enter Description :
           td#desc
-            textarea(name="description" cols="35" rows="5" required)
-        tr
-          td(colspan='2')
+            textarea(name="description" cols="35" class="hover:custom-shadow rounded-lg font-light" rows="5" required)
+        tr(class= "flex justify-between")
+          td(colspan='2' class="py-2 px-2 font-medium bg-gradient-to-r from-blue-400 to-cyan-400 rounded-lg hover:from-green-700 hover:to-green-500 hover:text-white transition duration-300")
             button#submit(type='reset' onclick="getFormData();") Submit
-          td(colspan='2')
-            button#reset(type='reset') Reset
+          td(colspan='2' class="py-2 px-2 font-medium  bg-blue-500 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-lg hover:from-red-500 hover:to-orange-500 hover:text-white transition duration-300")
+            button#reset(type='reset' ) Reset
 
 
 
